@@ -1,0 +1,12 @@
+replicaCount: 1
+image:
+  repository: node-server
+  tag: latest
+  pullPolicy: IfNotPresent
+service:
+  type: NodePort
+  port: 3000
+  nodePort: 30007
+env:
+  PORT: 3000
+  CUSTOM_MESSAGE: This is a custom message from the environment! 

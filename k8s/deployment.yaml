@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-server
+  namespace: kube-learn
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-server
+  template:
+    metadata:
+      labels:
+        app: node-server
+    spec:
+      containers:
+      - name: node-server
+        image: node-server:local
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3000
+        env:
+        - name: PORT
+          value: "3000"
+        - name: CUSTOM_MESSAGE
+          value: "This is a custom message from the environment!" 

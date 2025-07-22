@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "node-server.fullname" . }}
+  labels:
+    app: {{ include "node-server.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "node-server.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "node-server.name" . }}
+    spec:
+      containers:
+        - name: {{ include "node-server.name" . }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.port }}
+          env:
+            - name: PORT
+              value: "{{ .Values.env.PORT }}"
+            - name: CUSTOM_MESSAGE
+              value: "{{ .Values.env.CUSTOM_MESSAGE }}" 

@@ -1,0 +1,4 @@
+apiVersion: v2
+name: node-server
+version: 0.1.0
+description: A simple Node.js server Helm chart 
