@@ -23,4 +23,8 @@ spec:
         - name: PORT
           value: "3000"
         - name: CUSTOM_MESSAGE
-          value: "This is a custom message from the environment!" 
+          value: "This is a custom message from the environment!"
+        - name: KAFKA_BROKER
+          value: "kafka:9092"
+        - name: KAFKA_TOPIC
+          value: "kube-learn-topic" 
