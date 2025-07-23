@@ -9,8 +9,7 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: ${{ github.repository }}
-      REGISTRY: ghcr.io
+      IMAGE_NAME: ghcr.io/sanath1188/kube-learn
       IMAGE_TAG: ${{ github.sha }}
     steps:
       - name: Checkout code
@@ -31,11 +30,11 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository }}:${{ github.sha }}
+          tags: ghcr.io/sanath1188/kube-learn:${{ github.sha }}
 
       - name: Update deployment manifest with new image tag
         run: |
-          sed -i 's|image:.*|image: ghcr.io/${{ github.repository }}:${{ github.sha }}|' k8s/deployment.yaml
+          sed -i 's|image:.*|image: ghcr.io/sanath1188/kube-learn:${{ github.sha }}|' k8s/deployment.yaml
 
       - name: Commit and push manifest update
         run: |
