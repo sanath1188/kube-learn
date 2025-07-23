@@ -41,9 +41,12 @@ jobs:
           sed -i 's|image:.*|image: ghcr.io/sanath1188/kube-learn:${{ github.sha }}|' k8s/deployment.yaml
 
       - name: Commit and push manifest update
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
+          git remote set-url origin https://x-access-token:${GH_PAT}@github.com/sanath1188/kube-learn.git
           git add k8s/deployment.yaml
           git commit -m "Update image tag to ${{ github.sha }} [ci skip]" || echo "No changes to commit"
           git push 
