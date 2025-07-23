@@ -6,6 +6,7 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "kafkajs": "^2.2.4"
+    "kafkajs": "^2.2.4",
+    "express": "^4.19.2"
   }
 } 
