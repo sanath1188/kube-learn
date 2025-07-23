@@ -99,13 +99,32 @@ This project includes a Kafka producer and consumer using [kafkajs](https://kafk
 
 - **URL:** `POST /publish`
 - **Description:** Publishes a sample event to Kafka.
-- **Example with curl:**
-  ```sh
-  curl -X POST http://localhost:30007/publish
-  ```
+
+#### Example curl requests
+
+**Idempotency test (same id, simulates retry):**
+
+```sh
+curl -X POST http://localhost:30007/publish -H "Content-Type: application/json" -d '{"indempotencyTest": true}'
+```
+
+Run this multiple times—you should see only the first event processed, and subsequent ones logged as duplicates.
+
+**Normal event (unique id):**
+
+```sh
+curl -X POST http://localhost:30007/publish -H "Content-Type: application/json" -d '{}'
+```
+
+Or simply:
+
+```sh
+curl -X POST http://localhost:30007/publish
+```
+
 - **Expected Response:**
   ```json
-  { "status": "Event published!" }
+  { "status": "Event published!", "id": "..." }
   ```
 - **Expected Log Output (in pod logs):**
   ```
